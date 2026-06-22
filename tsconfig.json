@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "types": [
+            "node",
+            "playwright"
+        ],
+        "paths": {
+            "@configs/*": [
+                "./src/configs/*"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+            "@data/*": [
+                "./src/data/*"
+            ],
+            "@fixtures/*": [
+                "./src/fixtures/*"
+            ],
+            "@pages/*": [
+                "./src/pages/*"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

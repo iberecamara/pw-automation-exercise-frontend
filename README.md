@@ -1,0 +1,1 @@
+# Vanilla Playwright Test Automation Framework for Automation Exercise website frontend
