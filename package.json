@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx playwright test --config=src/configs/playwright.config.ts",
     "test:ui": "npx playwright test --ui --config=src/configs/playwright.config.ts",
-    "test:smoke": "npx playwright test --grep \"(?=.*@smoke)\" --config=psrc/configs/laywright.config.ts",
+    "test:smoke": "npx playwright test --grep \"(?=.*@smoke)\" --config=src/configs/playwright.config.ts",
     "test:ui:smoke": "npx playwright test --ui --grep \"(?=.*@smoke)\" --config=src/configs/playwright.config.ts",
     "test:sanity": "npx playwright test --grep \"(?=.*@sanity)\" --config=src/configs/playwright.config.ts",
     "test:ui:sanity": "npx playwright test --ui --grep \"(?=.*@sanity)\" --config=src/configs/playwright.config.ts",
@@ -36,7 +36,7 @@
     "async": "^0.2.10",
     "asynckit": "^0.4.0",
     "at-least-node": "^1.0.0",
-    "axios": "^1.17.0",
+    "axios": "^1.18.1",
     "balanced-match": "^4.0.4",
     "base64-js": "^1.5.1",
     "brace-expansion": "^5.0.6",

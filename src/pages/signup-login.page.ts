@@ -11,12 +11,24 @@ export class SignupLoginPage extends BasePage {
         this.components = new SignupLoginComponents(page);
     }
 
-    async enterLogin(login: string): Promise<void> {
-        await this.fill(this.components.loginInput, login);
+    async enterLoginEmail(email: string): Promise<void> {
+        await this.fill(this.components.loginEmailInput, email);
     }
 
-    async enterEmail(email: string): Promise<void> {
-        await this.fill(this.components.emailInput, email);
+    async enterLoginPassword(password: string): Promise<void> {
+        await this.fill(this.components.loginPasswordInput, password);
+    }
+
+    async clickLogin(): Promise<void> {
+        await this.click(this.components.loginButton);
+    }
+
+    async enterSignupLogin(login: string): Promise<void> {
+        await this.fill(this.components.signupLoginInput, login);
+    }
+
+    async enterSignupEmail(email: string): Promise<void> {
+        await this.fill(this.components.signupEmailInput, email);
     }
 
     async clickSignup(): Promise<void> {

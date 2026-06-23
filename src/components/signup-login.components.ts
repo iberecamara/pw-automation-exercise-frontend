@@ -2,15 +2,25 @@ import { Locator, Page } from '@playwright/test';
 
 export class SignupLoginComponents {
 
+    readonly loginSectionHeader: Locator;
+    readonly loginEmailInput: Locator;
+    readonly loginPasswordInput: Locator;
+    readonly loginButton: Locator;
+
     readonly signupSectionHeader: Locator;
-    readonly loginInput: Locator;
-    readonly emailInput: Locator;
+    readonly signupLoginInput: Locator;
+    readonly signupEmailInput: Locator;
     readonly signupButton: Locator;
 
     constructor(page: Page) {
+        this.loginSectionHeader = page.getByText('Login to your account');
+        this.loginEmailInput = page.getByTestId('login-email');
+        this.loginPasswordInput = page.getByTestId('login-password');
+        this.loginButton = page.getByTestId('login-button');
+
         this.signupSectionHeader = page.getByText('New User Signup!');
-        this.loginInput = page.getByTestId('signup-name');
-        this.emailInput = page.getByTestId('signup-email');
+        this.signupLoginInput = page.getByTestId('signup-name');
+        this.signupEmailInput = page.getByTestId('signup-email');
         this.signupButton = page.getByTestId('signup-button');
     }
 

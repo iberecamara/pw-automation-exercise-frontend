@@ -7,6 +7,9 @@
             "playwright"
         ],
         "paths": {
+            "@api/*": [
+                "./src/api/*"
+            ],
             "@configs/*": [
                 "./src/configs/*"
             ],
@@ -21,6 +24,9 @@
             ],
             "@pages/*": [
                 "./src/pages/*"
+            ],
+            "@steps/*": [
+                "./src/steps/*"
             ],
             "@utils/*": [
                 "./src/utils/*"

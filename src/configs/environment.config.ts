@@ -54,6 +54,9 @@ export class Environment {
     static readonly APPLICATION: string = parsed.value.APPLICATION;
     static readonly APPLICATION_ENVIRONMENT: string = parsed.value.APPLICATION_ENVIRONMENT;
     static readonly BASE_URL: string = 'https://automationexercise.com';
+    static readonly BASE_API_URL: string = `${Environment.BASE_URL}/api`;
+    static readonly CREATE_ACCOUNT_API_URL: string = `${Environment.BASE_API_URL}/createAccount`;
+    static readonly DELETE_ACCOUNT_API_URL: string = `${Environment.BASE_API_URL}/deleteAccount`;
 
     static readonly LOG_CONSOLE: boolean = parsed.value.LOG_CONSOLE;
     static readonly LOG_TYPE: string = parsed.value.LOG_TYPE;
