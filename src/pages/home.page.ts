@@ -24,4 +24,8 @@ export class HomePage extends BasePage {
         await this.click(this.components.deleteAccountLink);
     }
 
+    async clickLogout(): Promise<void> {
+        await this.click(this.components.logoutLink);
+    }
+
 }

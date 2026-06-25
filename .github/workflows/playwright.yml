@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   APPLICATION: Automation Exercise
-  WORKERS: 4
+  WORKERS: 1
   LOG_LINE_LENGTH: 100
   HEADLESS: true
 jobs:

@@ -1,12 +1,14 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { test } from '@fixtures/fixtures';
 import { TestAutomationLogger } from '@utils/logger.utils';
 import { UserType } from '@data/model/user.model';
 import { SignupLoginPage } from '@pages/signup-login.page';
+import { Environment } from '@configs/environment.config';
 
 export class SignupLoginSteps {
 
     async enterLoginData(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage, user: UserType): Promise<void> {
+        logger.info('Entering login data:');
         logger.info(`Using email: ${user.email}`);
         logger.info(`Using password: ${user.password}`);
         await test.step('Enter login data', async () => {
@@ -17,6 +19,7 @@ export class SignupLoginSteps {
     };
 
     async enterSignupData(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage, user: UserType): Promise<void> {
+        logger.info('Entering Signup data:');
         logger.info(`Using login: ${user.name}`);
         logger.info(`Using email: ${user.email}`);
         await test.step('Enter signup data', async () => {
@@ -62,5 +65,15 @@ export class SignupLoginSteps {
             ).toBeVisible();
         });
     }
+
+    async validateSignupLoginTitle(logger: TestAutomationLogger, page: Page): Promise<void> {
+        logger.info('Validating that application Signup / Login have the expected title.');
+        await test.step('Validate that application Signup / Login have the expected title', async () => {
+            await expect.soft(
+                page,
+                'Signup / Login page should have the expected title: "Automation Exercise - Signup / Login"'
+            ).toHaveTitle('Automation Exercise - Signup / Login');
+        });
+    };
 
 }
