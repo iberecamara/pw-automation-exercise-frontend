@@ -76,4 +76,14 @@ export class SignupLoginSteps {
         });
     };
 
+    async validateEmailAlreadyExistsMessage(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage): Promise<void> {
+        logger.info('Validating Signup section email already exists error message.');
+        await test.step('Validate that Signup / Login page have the expected text for exisint email in the Signup section', async () => {
+            await expect.soft(
+                signupLoginPage.components.emailreadyExistsMessage,
+                'Email Address already exist!'
+            ).toBeVisible();
+        });
+    }
+
 }

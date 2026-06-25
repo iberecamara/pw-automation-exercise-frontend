@@ -29,4 +29,22 @@ test.describe('User registration', async () => {
 
         });
 
+    test('Error for existing email in Register user',
+        { tag: ['@TC5', '@user-register', '@user-register-error'] },
+        async ({
+            page, logger, homeSteps, signupLoginSteps, apiSteps, userApi, homePage, signupLoginPage,
+        }) => {
+
+            const user: UserType = GenerateRandomUser();
+            await apiSteps.createAccount(logger, userApi, user);
+            await homeSteps.navigateHome(logger, homePage);
+            await homeSteps.validateHomeTitle(logger, page);
+            await homeSteps.clickSignupLogin(logger, homePage);
+            await signupLoginSteps.validateNewUserSignupText(logger, signupLoginPage);
+            await signupLoginSteps.enterSignupData(logger, signupLoginPage, user);
+            await signupLoginSteps.clickSignup(logger, signupLoginPage);
+            await signupLoginSteps.validateEmailAlreadyExistsMessage(logger, signupLoginPage);
+            await apiSteps.deleteAccount(logger, userApi, user);
+        });
+
 });

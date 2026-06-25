@@ -13,6 +13,7 @@ export class SignupLoginComponents {
     readonly signupButton: Locator;
 
     readonly invalidCredentialsMessage: Locator;
+    readonly emailreadyExistsMessage: Locator;
 
     constructor(page: Page) {
         this.loginSectionHeader = page.getByText('Login to your account');
@@ -26,6 +27,7 @@ export class SignupLoginComponents {
         this.signupButton = page.getByTestId('signup-button');
 
         this.invalidCredentialsMessage = page.getByText('Your email or password is incorrect!');
+        this.emailreadyExistsMessage = page.getByText('Email Address already exist!');
     }
 
 }
