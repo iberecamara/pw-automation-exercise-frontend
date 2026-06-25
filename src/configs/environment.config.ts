@@ -17,7 +17,7 @@ config({
 const variables = {
     // Playwright variables
     WORKERS: Joi.number().integer().positive(),
-    HEADLESS: Joi.boolean().allow('').default(false),
+    HEADLESS: Joi.boolean().allow(''),
     VIEWPORT_HEIGHT: Joi.number().integer().positive().allow(''),
     VIEWPORT_WIDTH: Joi.number().integer().positive().allow(''),
 
@@ -48,7 +48,7 @@ if (parsed.error) {
 export class Environment {
 
     static readonly WORKERS: number = parsed.value.WORKERS;
-    static readonly HEADLESS: boolean = parsed.value.HEADLESS;
+    static readonly HEADLESS: boolean = parsed.value.HEADLESS === '' ? false : parsed.value.HEADLESS;
     static readonly VIEWPORT: { height: number, width: number } | null = parsed.value.VIEWPORT_HEIGHT && parsed.value.VIEWPORT_WIDTH ? { height: parsed.value.VIEWPORT_HEIGHT, width: parsed.value.VIEWPORT_WIDTH } : null;
 
     static readonly APPLICATION: string = parsed.value.APPLICATION;

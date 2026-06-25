@@ -7,8 +7,8 @@ import { SignupLoginPage } from '@pages/signup-login.page';
 export class SignupLoginSteps {
 
     async enterLoginData(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage, user: UserType): Promise<void> {
-        logger.info(`Using login: ${user.name}`);
         logger.info(`Using email: ${user.email}`);
+        logger.info(`Using password: ${user.password}`);
         await test.step('Enter login data', async () => {
             await signupLoginPage.enterLoginEmail(user.email);
             await signupLoginPage.enterLoginPassword(user.password);
@@ -25,13 +25,16 @@ export class SignupLoginSteps {
         });
     }
 
-    async clickSignup(loogger: TestAutomationLogger, signupLoginPage: SignupLoginPage): Promise<void> {
+    async clickSignup(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage): Promise<void> {
+        logger.info('Clicking Signup button.');
         await test.step('Click Signup', async () => {
             await signupLoginPage.clickSignup();
         });
+        logger.info('Signup button clicked.');
     }
 
     async validateLoginToAccountText(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage): Promise<void> {
+        logger.info('Validating Login section heading text.');
         await test.step('Validate that Signup / Login page have the expected text in the Login section', async () => {
             await expect.soft(
                 signupLoginPage.components.loginSectionHeader,
@@ -41,6 +44,7 @@ export class SignupLoginSteps {
     };
 
     async validateNewUserSignupText(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage): Promise<void> {
+        logger.info('Validating Signup section heading text.');
         await test.step('Validate that Signup / Login page have the expected text in the Signup section', async () => {
             await expect.soft(
                 signupLoginPage.components.signupSectionHeader,
@@ -49,5 +53,14 @@ export class SignupLoginSteps {
         });
     }
 
+    async validateInvalidCredentialsMessage(logger: TestAutomationLogger, signupLoginPage: SignupLoginPage): Promise<void> {
+        logger.info('Validating Login section invalid credentials error message.');
+        await test.step('Validate that Signup / Login page have the expected text for invalid credentials in the Login section', async () => {
+            await expect.soft(
+                signupLoginPage.components.invalidCredentialsMessage,
+                'Your email or password is incorrect!'
+            ).toBeVisible();
+        });
+    }
 
 }

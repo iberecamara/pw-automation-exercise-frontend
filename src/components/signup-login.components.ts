@@ -12,6 +12,8 @@ export class SignupLoginComponents {
     readonly signupEmailInput: Locator;
     readonly signupButton: Locator;
 
+    readonly invalidCredentialsMessage: Locator;
+
     constructor(page: Page) {
         this.loginSectionHeader = page.getByText('Login to your account');
         this.loginEmailInput = page.getByTestId('login-email');
@@ -22,6 +24,8 @@ export class SignupLoginComponents {
         this.signupLoginInput = page.getByTestId('signup-name');
         this.signupEmailInput = page.getByTestId('signup-email');
         this.signupButton = page.getByTestId('signup-button');
+
+        this.invalidCredentialsMessage = page.getByText('Your email or password is incorrect!');
     }
 
 }

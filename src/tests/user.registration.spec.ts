@@ -5,7 +5,10 @@ test.describe('User registration', async () => {
 
     test('Register user',
         { tag: ['@TC1', '@user-register'] },
-        async ({ page, logger, homeSteps, signupLoginSteps, signupSteps, accountCreatedDeletedSteps, homePage, signupLoginPage, signupPage, accountCreatedDeletedPage }) => {
+        async ({
+            page, logger, homeSteps, signupLoginSteps, signupSteps, accountCreatedDeletedSteps,
+            homePage, signupLoginPage, signupPage, accountCreatedDeletedPage
+        }) => {
 
             const user: UserType = GenerateRandomUser();
             await homeSteps.navigateHome(logger, homePage);
