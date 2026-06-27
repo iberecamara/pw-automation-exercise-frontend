@@ -12,7 +12,7 @@ export default defineConfig({
   },
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? os.cpus().length : Environment.WORKERS ?? 1,
+  workers: Environment.WORKERS,
   reporter: [
     ["html", { open: "never", outputFolder: "../../artifacts/reports/html" }],
     ["json", { outputFile: "../../artifacts/reports/json/report.json" }],
