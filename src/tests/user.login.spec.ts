@@ -26,7 +26,7 @@ test.describe('User login', async () => {
         });
 
     test('Login with invalid user',
-        { tag: ['@TC3.1', '@user-login', '@login-error', '@invalid-user'] },
+        { tag: ['@TC3', '@TC3.1', '@user-login', '@login-error', '@invalid-user'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, apiSteps, userApi, homePage, signupLoginPage
         }) => {
@@ -43,7 +43,7 @@ test.describe('User login', async () => {
         });
 
     test('Login with invalid password',
-        { tag: ['@TC3.2', '@user-login', '@invalid-password'] },
+        { tag: ['@TC3', '@TC3.2', '@user-login', '@invalid-password'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, userApi, apiSteps, homePage, signupLoginPage
         }) => {

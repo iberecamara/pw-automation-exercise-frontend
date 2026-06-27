@@ -4,6 +4,7 @@ import { ContactUsPage } from "@pages/contact-us.page";
 import { HomePage } from "@pages/home.page";
 import { SignupLoginPage } from "@pages/signup-login.page";
 import { SignupPage } from "@pages/signup.page";
+import { TestCasesPage } from "@pages/test-cases.page";
 import { test as base, Page } from "@playwright/test";
 
 type PageConstructor<T> = new (page: Page) => T;
@@ -16,17 +17,32 @@ function createPageFixture<T>(pageConstructor: PageConstructor<T>) {
 }
 
 type PageFixtures = {
+    adBlocker: void;
     homePage: HomePage,
     signupLoginPage: SignupLoginPage,
     signupPage: SignupPage,
     accountCreatedDeletedPage: AccountCreatedDeletedPage,
     contactUsPage: ContactUsPage,
+    testCasesPage: TestCasesPage,
 };
 
 export const test = base.extend<PageFixtures>({
+    adBlocker: [
+        async ({ page }, use) => {
+            await page.route("**/*", route => {
+                route.request().url().startsWith("https://googleads.") ?
+                    route.abort() : route.continue();
+                return;
+            });
+            use();
+        }, {
+            auto: true
+        }
+    ],
     homePage: createPageFixture(HomePage),
     signupLoginPage: createPageFixture(SignupLoginPage),
     signupPage: createPageFixture(SignupPage),
     accountCreatedDeletedPage: createPageFixture(AccountCreatedDeletedPage),
     contactUsPage: createPageFixture(ContactUsPage),
+    testCasesPage: createPageFixture(TestCasesPage),
 });

@@ -32,4 +32,8 @@ export class HomePage extends BasePage {
         await this.click(this.components.contactUsLink);
     }
 
+    async clickTestCases(): Promise<void> {
+        await this.click(this.components.testCasesLink);
+    }
+
 }

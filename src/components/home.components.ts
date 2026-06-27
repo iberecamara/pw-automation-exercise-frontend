@@ -7,6 +7,7 @@ export class HomeComponents {
     readonly deleteAccountLink: Locator;
     readonly logoutLink: Locator;
     readonly contactUsLink: Locator;
+    readonly testCasesLink: Locator;
 
     constructor(page: Page) {
         this.signupLoginButton = page.getByText('Signup / Login');
@@ -16,6 +17,7 @@ export class HomeComponents {
         this.deleteAccountLink = page.getByRole('link', { name: ' Delete Account' });
         this.logoutLink = page.getByRole('link', { name: ' Logout' });
         this.contactUsLink = page.getByRole('link', { name: ' Contact us' });
+        this.testCasesLink = page.getByRole('link', { name: ' Test Cases' });
     }
 
 }

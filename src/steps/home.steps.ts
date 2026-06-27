@@ -48,6 +48,14 @@ export class HomeSteps {
         logger.info('Clicked "Contact us" in home page');
     }
 
+    async clickTestCases(logger: TestAutomationLogger, homePage: HomePage): Promise<void> {
+        logger.info('Clicking "Test Cases" in home page');
+        await test.step('Click "Test Cases" in home page', async () => {
+            await homePage.clickTestCases();
+        });
+        logger.info('Clicked "Test Cases" in home page');
+    }
+
     // Validations
     async validateHomeTitle(logger: TestAutomationLogger, page: Page): Promise<void> {
         logger.info('Validating that  application home page have the expected title');

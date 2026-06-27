@@ -17,3 +17,8 @@ export const VALID_TITLES: string[] = [
     'Mr.',
     'Ms.'
 ];
+
+export const VALID_DIRECTIONS: string[] = [
+    'up',
+    'down'
+];

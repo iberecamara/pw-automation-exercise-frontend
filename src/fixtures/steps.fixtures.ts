@@ -6,6 +6,7 @@ import { ContactUsSteps } from "@steps/contact-us.steps";
 import { HomeSteps } from "@steps/home.steps";
 import { SignupLoginSteps } from "@steps/signup-login.steps";
 import { SignupSteps } from "@steps/signup.steps";
+import { TestCasesSteps } from "@steps/test-cases.steps";
 
 type StepsConstructor<T> = new () => T;
 
@@ -23,6 +24,7 @@ type StepsFixtures = {
     signupSteps: SignupSteps,
     accountCreatedDeletedSteps: AccountCreatedDeletedSteps,
     contactUsSteps: ContactUsSteps,
+    testCaseSteps: TestCasesSteps,
 };
 
 export const test = base.extend<StepsFixtures>({
@@ -32,5 +34,5 @@ export const test = base.extend<StepsFixtures>({
     signupSteps: createStepFixture(SignupSteps),
     accountCreatedDeletedSteps: createStepFixture(AccountCreatedDeletedSteps),
     contactUsSteps: createStepFixture(ContactUsSteps),
-
+    testCaseSteps: createStepFixture(TestCasesSteps),
 });
