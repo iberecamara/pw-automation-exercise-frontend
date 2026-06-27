@@ -1,7 +1,7 @@
-import { Environment } from '@configs/environment.config';
-import { Page } from '@playwright/test';
-import { BasePage } from '@pages/base.page';
 import { HomeComponents } from '@components/home.components';
+import { Environment } from '@configs/environment.config';
+import { BasePage } from '@pages/base.page';
+import { Page } from '@playwright/test';
 
 export class HomePage extends BasePage {
 
@@ -26,6 +26,10 @@ export class HomePage extends BasePage {
 
     async clickLogout(): Promise<void> {
         await this.click(this.components.logoutLink);
+    }
+
+    async clickContactUs(): Promise<void> {
+        await this.click(this.components.contactUsLink);
     }
 
 }

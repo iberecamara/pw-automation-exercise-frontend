@@ -1,9 +1,10 @@
 
-import { test as base, Page } from "@playwright/test";
+import { AccountCreatedDeletedPage } from "@pages/account-created-deleted.page";
+import { ContactUsPage } from "@pages/contact-us.page";
 import { HomePage } from "@pages/home.page";
 import { SignupLoginPage } from "@pages/signup-login.page";
 import { SignupPage } from "@pages/signup.page";
-import { AccountCreatedDeletedPage } from "@pages/account-created-deleted.page";
+import { test as base, Page } from "@playwright/test";
 
 type PageConstructor<T> = new (page: Page) => T;
 
@@ -19,6 +20,7 @@ type PageFixtures = {
     signupLoginPage: SignupLoginPage,
     signupPage: SignupPage,
     accountCreatedDeletedPage: AccountCreatedDeletedPage,
+    contactUsPage: ContactUsPage,
 };
 
 export const test = base.extend<PageFixtures>({
@@ -26,4 +28,5 @@ export const test = base.extend<PageFixtures>({
     signupLoginPage: createPageFixture(SignupLoginPage),
     signupPage: createPageFixture(SignupPage),
     accountCreatedDeletedPage: createPageFixture(AccountCreatedDeletedPage),
+    contactUsPage: createPageFixture(ContactUsPage),
 });

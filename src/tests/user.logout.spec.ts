@@ -1,6 +1,5 @@
 import { test } from '@fixtures/fixtures';
 import { GenerateRandomUser, UserType } from '@data/model/user.model';
-import { HomeComponents } from '@components/home.components';
 
 test.describe('User logout', async () => {
 

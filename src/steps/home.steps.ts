@@ -1,12 +1,13 @@
 import { Environment } from '@configs/environment.config';
-import { expect, Page } from '@playwright/test';
+import { UserType } from '@data/model/user.model';
 import { test } from '@fixtures/fixtures';
 import { HomePage } from '@pages/home.page';
+import { expect, Page } from '@playwright/test';
 import { TestAutomationLogger } from '@utils/logger.utils';
-import { UserType } from '@data/model/user.model';
 
 export class HomeSteps {
 
+    // Actions
     async navigateHome(logger: TestAutomationLogger, homePage: HomePage): Promise<void> {
         logger.info(`Navigating to home page at '${Environment.BASE_URL}'.`);
         await test.step('Navigate to application home page', async () => {
@@ -24,9 +25,11 @@ export class HomeSteps {
     }
 
     async clickDeleteAccount(logger: TestAutomationLogger, homePage: HomePage): Promise<void> {
+        logger.info('Clicking "Delete Account" in home page');
         await test.step('Click "Delete Account" in home page', async () => {
             await homePage.clickDeleteAccount();
         });
+        logger.info('Clicked "Delete Account" in home page');
     }
 
     async clickLogout(logger: TestAutomationLogger, homePage: HomePage): Promise<void> {
@@ -37,8 +40,17 @@ export class HomeSteps {
         logger.info('Clicked "Logout" in home page');
     }
 
+    async clickContactUs(logger: TestAutomationLogger, homePage: HomePage): Promise<void> {
+        logger.info('Clicking "Contact us" in home page');
+        await test.step('Click "Contact us" in home page', async () => {
+            await homePage.clickContactUs();
+        });
+        logger.info('Clicked "Contact us" in home page');
+    }
+
+    // Validations
     async validateHomeTitle(logger: TestAutomationLogger, page: Page): Promise<void> {
-        logger.info('');
+        logger.info('Validating that  application home page have the expected title');
         await test.step('Validate that application home page have the expected title', async () => {
             await expect.soft(
                 page,
