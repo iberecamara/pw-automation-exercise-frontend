@@ -1,6 +1,6 @@
 import { ProductComponents } from '@components/product.components';
 import { EMPTY } from '@data/constants/string.constants';
-import { ProductType } from '@data/model/product.model';
+import { FullProductType } from '@data/model/product.model';
 import { BasePage } from '@pages/base.page';
 import { Page } from '@playwright/test';
 
@@ -13,10 +13,8 @@ export class ProductPage extends BasePage {
         this.components = new ProductComponents(page);
     }
 
-    async getProductDetails(): Promise<ProductType> {
-        const url = this.page.url();
-        const indexOffset = 1;
-        const index = url.slice(url.lastIndexOf('/') + indexOffset);
+    async getProductDetails(): Promise<FullProductType> {
+        const index = await this.components.productDetailContainer.locator('#product_id').first().getAttribute('value') ?? '';
         const name = await this.components.productDetailContainer.locator('h2').first().textContent() ?? '';
         const category = await this.components.productDetailContainer.locator('p').first().textContent() ?? '';
         const price = await this.components.productDetailContainer.locator('span').first().locator('span').first().textContent() ?? '';

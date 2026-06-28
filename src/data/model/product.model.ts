@@ -1,4 +1,4 @@
-export interface ProductType {
+export interface FullProductType {
     index: number,
     name: string,
     category: string,
@@ -6,4 +6,9 @@ export interface ProductType {
     availability: string,
     condition: string,
     brand: string
+}
+
+export interface ResumedProductType {
+    name: string,
+    price: number,
 }

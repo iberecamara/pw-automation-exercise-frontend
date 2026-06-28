@@ -1,3 +1,4 @@
+import { ResumedProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
 import { ProductsPage } from '@pages/products.page';
 import { expect, Page } from '@playwright/test';
@@ -16,12 +17,30 @@ export class ProductsSteps {
         return count;
     }
 
-    async navigateToProductView(logger: TestAutomationLogger, producsPage: ProductsPage, productIndex: number): Promise<void> {
+    async navigateToProductView(logger: TestAutomationLogger, productsPage: ProductsPage, productIndex: number): Promise<void> {
         logger.info(`Navigating to product #${productIndex}`);
         await test.step('Navigating to product view', async () => {
-            await producsPage.clickProductView(productIndex);
+            await productsPage.clickProductView(productIndex);
         });
         logger.info(`Navigated to product #${productIndex}`);
+    }
+
+    async searchProducts(logger: TestAutomationLogger, productsPage: ProductsPage, searchTerm: string): Promise<void> {
+        logger.info(`Searching for products with '${searchTerm}'.`);
+        await test.step('Searching products', async () => {
+            await productsPage.searchProducts(searchTerm);
+        });
+        logger.info(`Searched for '${searchTerm}'.`);
+    }
+
+    async getProducts(logger: TestAutomationLogger, productsPage: ProductsPage): Promise<ResumedProductType[]> {
+        logger.info('Retrieveing all products details');
+        const products: ResumedProductType[] = [];
+        await test.step('Retrieveing all  products', async () => {
+            products.push(...await productsPage.getProducts());
+        });
+        logger.info('Retrieved all products details');
+        return products;
     }
 
     // Validations
@@ -43,6 +62,16 @@ export class ProductsSteps {
                 'Products page should have the expected amout of products'
             ).toBe(expectedCount);
         });
+    }
+
+    validateDisplayedProductsHaveSearchTerm(logger: TestAutomationLogger, products: ResumedProductType[], searchTerm: string): void {
+        logger.info(`Validating displayed Products have the search term '${searchTerm}'.`);
+        for (const product of products) {
+            expect.soft(
+                product.name.toLowerCase(),
+                `Products should have the search term '${searchTerm}'.`
+            ).toContain(searchTerm.toLowerCase());
+        }
     }
 
 }
