@@ -2,6 +2,8 @@
 import { AccountCreatedDeletedPage } from "@pages/account-created-deleted.page";
 import { ContactUsPage } from "@pages/contact-us.page";
 import { HomePage } from "@pages/home.page";
+import { ProductPage } from "@pages/product.page";
+import { ProductsPage } from "@pages/products.page";
 import { SignupLoginPage } from "@pages/signup-login.page";
 import { SignupPage } from "@pages/signup.page";
 import { TestCasesPage } from "@pages/test-cases.page";
@@ -24,6 +26,8 @@ type PageFixtures = {
     accountCreatedDeletedPage: AccountCreatedDeletedPage,
     contactUsPage: ContactUsPage,
     testCasesPage: TestCasesPage,
+    productsPage: ProductsPage,
+    productPage: ProductPage,
 };
 
 export const test = base.extend<PageFixtures>({
@@ -45,4 +49,6 @@ export const test = base.extend<PageFixtures>({
     accountCreatedDeletedPage: createPageFixture(AccountCreatedDeletedPage),
     contactUsPage: createPageFixture(ContactUsPage),
     testCasesPage: createPageFixture(TestCasesPage),
+    productsPage: createPageFixture(ProductsPage),
+    productPage: createPageFixture(ProductPage),
 });

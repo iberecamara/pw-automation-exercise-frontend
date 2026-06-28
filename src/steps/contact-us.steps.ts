@@ -4,12 +4,13 @@ import { test } from '@fixtures/fixtures';
 import { ContactUsPage } from '@pages/contact-us.page';
 import { expect } from '@playwright/test';
 import { TestAutomationLogger } from '@utils/logger.utils';
+import { StringUtils } from '@utils/string.utils';
 
 export class ContactUsSteps {
 
     // Actions
     async enterContactFormData(logger: TestAutomationLogger, contactUsPage: ContactUsPage, formData: ContactUsType): Promise<void> {
-        logger.info(`Using Contact Us data: ${NEWLINE}${JSON.stringify(formData, null, 4)}`)
+        logger.info(`Using Contact Us data: ${NEWLINE}${StringUtils.prettyJson(formData)}`)
         await test.step('Enter Contact Us data', async () => {
             await contactUsPage.enterName(formData.name);
             await contactUsPage.enterEmail(formData.email);

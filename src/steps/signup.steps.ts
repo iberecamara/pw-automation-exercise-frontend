@@ -4,11 +4,12 @@ import { TestAutomationLogger } from '@utils/logger.utils';
 import { UserType } from '@data/model/user.model';
 import { SignupPage } from '@pages/signup.page';
 import { NEWLINE } from '@data/constants/string.constants';
+import { StringUtils } from '@utils/string.utils';
 
 export class SignupSteps {
 
     async enterSignupData(logger: TestAutomationLogger, signupPage: SignupPage, user: UserType): Promise<void> {
-        logger.info(`Using signup data: ${NEWLINE}${JSON.stringify(user, null, 4)}`)
+        logger.info(`Using signup data: ${NEWLINE}${StringUtils.prettyJson(user)}`)
         await test.step('Enter user data for Signup', async () => {
             await signupPage.chooseTitle(user.title);
             await signupPage.enterPassword(user.password);

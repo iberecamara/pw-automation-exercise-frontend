@@ -5,11 +5,12 @@ import { TestAutomationLogger } from '@utils/logger.utils';
 import { UserApi } from '@api/user.api';
 import { UserType } from '@data/model/user.model';
 import { NEWLINE } from '@data/constants/string.constants';
+import { StringUtils } from '@utils/string.utils';
 
 export class ApiSteps {
 
     async createAccount(logger: TestAutomationLogger, userApi: UserApi, user: UserType): Promise<void> {
-        logger.info(`Creating user via API:${NEWLINE}${JSON.stringify(user, null, 4)}`);
+        logger.info(`Creating user via API:${NEWLINE}${StringUtils.prettyJson(user)}`);
         await test.step('Create valid user via API', async () => {
             const response: ResponseType = await userApi.createUser(user);
             expect(response.responseCode, "User create response code must be 201").toBe(201);
@@ -19,7 +20,7 @@ export class ApiSteps {
     };
 
     async deleteAccount(logger: TestAutomationLogger, userApi: UserApi, user: UserType): Promise<void> {
-        logger.info(`Deleting user via API:${NEWLINE}${JSON.stringify(user, null, 4)}`);
+        logger.info(`Deleting user via API:${NEWLINE}${StringUtils.prettyJson(user)}`);
         await test.step('Delete user via API', async () => {
             const response: ResponseType = await userApi.deleteUser(user.email, user.password);
             expect(response.responseCode, "User delete response code must be 200").toBe(200);
