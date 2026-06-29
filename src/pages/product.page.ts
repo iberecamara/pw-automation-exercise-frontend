@@ -1,6 +1,6 @@
 import { ProductComponents } from '@components/product.components';
 import { EMPTY } from '@data/constants/string.constants';
-import { FullProductType } from '@data/model/product.model';
+import { ProductType } from '@data/model/product.model';
 import { BasePage } from '@pages/base.page';
 import { Page } from '@playwright/test';
 
@@ -13,14 +13,14 @@ export class ProductPage extends BasePage {
         this.components = new ProductComponents(page);
     }
 
-    async getProductDetails(): Promise<FullProductType> {
-        const index = await this.components.productDetailContainer.locator('#product_id').first().getAttribute('value') ?? '';
-        const name = await this.components.productDetailContainer.locator('h2').first().textContent() ?? '';
-        const category = await this.components.productDetailContainer.locator('p').first().textContent() ?? '';
-        const price = await this.components.productDetailContainer.locator('span').first().locator('span').first().textContent() ?? '';
-        const availability = await this.components.productDetailContainer.locator('p').nth(1).textContent() ?? '';
-        const condition = await this.components.productDetailContainer.locator('p').nth(2).textContent() ?? '';
-        const brand = await this.components.productDetailContainer.locator('p').nth(3).textContent() ?? '';
+    async getProductDetails(): Promise<ProductType> {
+        const index = await this.components.productDetailContainer.locator('#product_id').first().getAttribute('value') ?? EMPTY;
+        const name = await this.components.productDetailContainer.locator('h2').first().textContent() ?? EMPTY;
+        const category = await this.components.productDetailContainer.locator('p').first().textContent() ?? EMPTY;
+        const price = await this.components.productDetailContainer.locator('span').first().locator('span').first().textContent() ?? EMPTY;
+        const availability = await this.components.productDetailContainer.locator('p').nth(1).textContent() ?? EMPTY;
+        const condition = await this.components.productDetailContainer.locator('p').nth(2).textContent() ?? EMPTY;
+        const brand = await this.components.productDetailContainer.locator('p').nth(3).textContent() ?? EMPTY;
         return {
             index: +index,
             name: name,

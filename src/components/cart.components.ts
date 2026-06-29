@@ -1,9 +1,11 @@
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export class CartComponents {
 
-    constructor(page: Page) {
+    readonly cartItemsTable: Locator;
 
+    constructor(page: Page) {
+        this.cartItemsTable = page.locator('#cart_info_table');
     }
 
 }

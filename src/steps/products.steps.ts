@@ -1,4 +1,5 @@
-import { ResumedProductType } from '@data/model/product.model';
+import { EMPTY } from '@data/constants/string.constants';
+import { ProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
 import { ProductsPage } from '@pages/products.page';
 import { expect, Page } from '@playwright/test';
@@ -33,14 +34,48 @@ export class ProductsSteps {
         logger.info(`Searched for '${searchTerm}'.`);
     }
 
-    async getProducts(logger: TestAutomationLogger, productsPage: ProductsPage): Promise<ResumedProductType[]> {
+    async getProductDetails(logger: TestAutomationLogger, productsPage: ProductsPage, productName: string): Promise<ProductType> {
+        logger.info(`Retrieving products details for '${productName}'.`);
+        let product: ProductType = { name: EMPTY, price: 0 };
+        await test.step(`Retrieve product details for '${productName}'`, async () => {
+            product = await productsPage.getProductDetails({ productName: productName });
+        });
+        logger.info(`Retried products details for '${productName}'.`);
+        return product;
+    }
+
+    async getProducts(logger: TestAutomationLogger, productsPage: ProductsPage): Promise<ProductType[]> {
         logger.info('Retrieveing all products details');
-        const products: ResumedProductType[] = [];
-        await test.step('Retrieveing all  products', async () => {
+        const products: ProductType[] = [];
+        await test.step('Retrieve all products', async () => {
             products.push(...await productsPage.getProducts());
         });
         logger.info('Retrieved all products details');
         return products;
+    }
+
+    async hoverProduct(logger: TestAutomationLogger, productsPage: ProductsPage, productName: string): Promise<void> {
+        logger.info(`Hovering over product '${productName}'.`);
+        await test.step(`Hover over product '${productName}'.`, async () => {
+            await productsPage.hoverProduct(productName);
+        });
+        logger.info(`Hovered over product '${productName}'.`);
+    }
+
+    async addProductToCartFromHover(logger: TestAutomationLogger, productsPage: ProductsPage, productName: string): Promise<void> {
+        logger.info(`Adding product '${productName}' to cart from hover overlay.`);
+        await test.step(`Add product '${productName}' to cart from hover overlay.`, async () => {
+            await productsPage.clickAddToCartFromHover(productName);
+        });
+        logger.info(`Added product '${productName}' to cart from hover overlay.`);
+    }
+
+    async continueShopping(logger: TestAutomationLogger, productsPage: ProductsPage): Promise<void> {
+        logger.info('Clicking Continue Shopping.');
+        await test.step('Click Continue Shopping', async () => {
+            await productsPage.clickContinueShopping();
+        });
+        logger.info('Clicked Continue Shopping.');
     }
 
     // Validations
@@ -64,7 +99,7 @@ export class ProductsSteps {
         });
     }
 
-    validateDisplayedProductsHaveSearchTerm(logger: TestAutomationLogger, products: ResumedProductType[], searchTerm: string): void {
+    validateDisplayedProductsHaveSearchTerm(logger: TestAutomationLogger, products: ProductType[], searchTerm: string): void {
         logger.info(`Validating displayed Products have the search term '${searchTerm}'.`);
         for (const product of products) {
             expect.soft(

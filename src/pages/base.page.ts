@@ -33,6 +33,10 @@ export class BasePage {
         await locator.selectOption(option);
     }
 
+    async hover(locator: Locator): Promise<void> {
+        await locator.hover();
+    }
+
     async scroll(direction: string) {
         const scroller = (async (direction: string) => {
             const DOWN = "down"; // Redeclaring the constant here due to hoisting

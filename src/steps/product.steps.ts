@@ -1,5 +1,5 @@
 import { NEWLINE } from '@data/constants/string.constants';
-import { FullProductType } from '@data/model/product.model';
+import { ProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
 import { ProductsPage } from '@pages/products.page';
 import { expect, Page } from '@playwright/test';
@@ -48,7 +48,7 @@ export class ProductSteps {
         });
     }
 
-    async validateProductDetails(logger: TestAutomationLogger, firstProduct: FullProductType, productDetails: FullProductType): Promise<void> {
+    async validateProductDetails(logger: TestAutomationLogger, firstProduct: ProductType, productDetails: ProductType): Promise<void> {
         logger.info('Validating that retrieved product matches the first product.');
         logger.info(`First product: ${NEWLINE}${StringUtils.prettyJson(firstProduct)}`);
         logger.info(`Retrieved product: ${NEWLINE}${StringUtils.prettyJson(productDetails)}`);

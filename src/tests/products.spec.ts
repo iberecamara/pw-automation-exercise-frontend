@@ -1,4 +1,4 @@
-import { ResumedProductType, FullProductType } from '@data/model/product.model';
+import { ResumedProductType, ProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
 
 test.describe('Products page', async () => {
@@ -15,7 +15,7 @@ test.describe('Products page', async () => {
             const count = await productsSteps.getProductsCount(logger, productsPage);
             const expectedCount = 34;
             await productsSteps.validateProductsCount(logger, count, expectedCount);
-            const firstProduct: FullProductType = {
+            const firstProduct: ProductType = {
                 index: 1,
                 name: 'Blue Top',
                 category: 'Women > Tops',
@@ -25,7 +25,7 @@ test.describe('Products page', async () => {
                 brand: 'Polo'
             };
             await productsSteps.navigateToProductView(logger, productsPage, firstProduct.index);
-            const productDetails: FullProductType = await productPage.getProductDetails();
+            const productDetails: ProductType = await productPage.getProductDetails();
             await productSteps.validateProductDetails(logger, firstProduct, productDetails);
         });
 
