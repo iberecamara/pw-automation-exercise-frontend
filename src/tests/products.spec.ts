@@ -6,11 +6,11 @@ test.describe('Products page', async () => {
     test('Validate Products page',
         { tag: ['@TC8', '@products'] },
         async ({
-            logger, page, homeSteps, homePage, productsSteps, productsPage, productSteps, productPage
+            logger, page, homeSteps, homePage, productsSteps, productsPage, productSteps, productPage, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickProducts(logger, homePage);
+            await sharedSteps.clickProducts(logger, homePage.header);
             await productsSteps.validateProductsTitle(logger, page);
             const count = await productsSteps.getProductsCount(logger, productsPage);
             const expectedCount = 34;
@@ -32,11 +32,11 @@ test.describe('Products page', async () => {
     test('Validate Search in Products page',
         { tag: ['@TC9', '@products', '@search-products'] },
         async ({
-            logger, page, homeSteps, homePage, productsSteps, productsPage
+            logger, page, homeSteps, homePage, productsSteps, productsPage, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickProducts(logger, homePage);
+            await sharedSteps.clickProducts(logger, homePage.header);
             await productsSteps.validateProductsTitle(logger, page);
             const searchTerm: string = 'blue';
             await productsSteps.searchProducts(logger, productsPage, searchTerm);

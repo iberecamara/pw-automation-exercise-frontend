@@ -1,6 +1,10 @@
 export const BUTTON: string = "button";
 export const YES: string = "yes";
 export const NO: string = "no";
+export const UP: string = "up";
+export const DOWN: string = "down";
+export const CREATED: string = "created";
+export const DELETED: string = "deleted";
 export const MINUTE_IN_MILISSECONDS: number = 1000;
 
 export const VALID_COUNTRIES: string[] = [
@@ -19,6 +23,6 @@ export const VALID_TITLES: string[] = [
 ];
 
 export const VALID_DIRECTIONS: string[] = [
-    'up',
-    'down'
+    UP,
+    DOWN
 ];

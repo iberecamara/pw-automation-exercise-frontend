@@ -2,6 +2,8 @@
 import { test as base } from "@playwright/test";
 import { AccountCreatedDeletedSteps } from "@steps/account-created-deleted.steps";
 import { ApiSteps } from "@steps/api.steps";
+import { CartSteps } from "@steps/cart.steps";
+import { SharedSteps } from "@steps/shared.steps";
 import { ContactUsSteps } from "@steps/contact-us.steps";
 import { HomeSteps } from "@steps/home.steps";
 import { ProductSteps } from "@steps/product.steps";
@@ -29,6 +31,8 @@ type StepsFixtures = {
     testCaseSteps: TestCasesSteps,
     productsSteps: ProductsSteps,
     productSteps: ProductSteps,
+    sharedSteps: SharedSteps,
+    cartSteps: CartSteps,
 };
 
 export const test = base.extend<StepsFixtures>({
@@ -41,4 +45,6 @@ export const test = base.extend<StepsFixtures>({
     testCaseSteps: createStepFixture(TestCasesSteps),
     productsSteps: createStepFixture(ProductsSteps),
     productSteps: createStepFixture(ProductSteps),
+    sharedSteps: createStepFixture(SharedSteps),
+    cartSteps: createStepFixture(CartSteps),
 });

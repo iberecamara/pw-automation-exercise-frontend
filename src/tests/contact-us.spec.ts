@@ -6,11 +6,11 @@ test.describe('Contact Us form', async () => {
     test('Validate Contact Us form',
         { tag: ['@TC6', '@contact-us'] },
         async ({
-            logger, page, homeSteps, homePage, contactUsPage, contactUsSteps
+            logger, page, homeSteps, homePage, contactUsPage, contactUsSteps, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickContactUs(logger, homePage);
+            await sharedSteps.clickContactUs(logger, homePage.header);
             await contactUsSteps.validateGetInTouchText(logger, contactUsPage);
             await contactUsSteps.enterContactFormData(logger, contactUsPage, GenerateRandomContactUsData({ file: 'sample_file.pdf' }));
             await contactUsSteps.clickSubmit(logger, contactUsPage, { accept: true });

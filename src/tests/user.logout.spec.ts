@@ -13,15 +13,15 @@ test.describe('User logout', async () => {
         { tag: ['@TC4', '@user-logout'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, apiSteps, userApi,
-            homePage, signupLoginPage,
+            homePage, signupLoginPage, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickSignupLogin(logger, homePage);
+            await sharedSteps.clickSignupLogin(logger, homePage.header);
             await signupLoginSteps.validateLoginToAccountText(logger, signupLoginPage);
             await signupLoginSteps.enterLoginData(logger, signupLoginPage, user);
-            await homeSteps.validateUserLoggedText(logger, homePage, user);
-            await homeSteps.clickLogout(logger, homePage);
+            await sharedSteps.validateUserLoggedText(logger, homePage.header, user);
+            await sharedSteps.clickLogout(logger, homePage.header);
             await signupLoginSteps.validateSignupLoginTitle(logger, page);
             await apiSteps.deleteAccount(logger, userApi, user);
         });

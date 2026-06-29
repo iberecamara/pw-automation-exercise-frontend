@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export class HomeComponents {
+export class CartComponents {
 
     constructor(page: Page) {
 

@@ -1,5 +1,6 @@
 
 import { AccountCreatedDeletedPage } from "@pages/account-created-deleted.page";
+import { CartPage } from "@pages/cart.page";
 import { ContactUsPage } from "@pages/contact-us.page";
 import { HomePage } from "@pages/home.page";
 import { ProductPage } from "@pages/product.page";
@@ -19,7 +20,7 @@ function createPageFixture<T>(pageConstructor: PageConstructor<T>) {
 }
 
 type PageFixtures = {
-    adBlocker: void;
+    adblocker: void;
     homePage: HomePage,
     signupLoginPage: SignupLoginPage,
     signupPage: SignupPage,
@@ -28,10 +29,11 @@ type PageFixtures = {
     testCasesPage: TestCasesPage,
     productsPage: ProductsPage,
     productPage: ProductPage,
+    cartPage: CartPage,
 };
 
 export const test = base.extend<PageFixtures>({
-    adBlocker: [
+    adblocker: [
         async ({ page }, use) => {
             await page.route("**/*", route => {
                 route.request().url().startsWith("https://googleads.") ?
@@ -51,4 +53,5 @@ export const test = base.extend<PageFixtures>({
     testCasesPage: createPageFixture(TestCasesPage),
     productsPage: createPageFixture(ProductsPage),
     productPage: createPageFixture(ProductPage),
+    cartPage: createPageFixture(CartPage),
 });

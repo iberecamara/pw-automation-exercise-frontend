@@ -1,5 +1,6 @@
 import { test } from '@fixtures/fixtures';
 import { GenerateRandomUser, UserType } from '@data/model/user.model';
+import { DELETED } from '@data/constants/common.constants';
 
 test.describe('User login', async () => {
 
@@ -13,26 +14,26 @@ test.describe('User login', async () => {
         { tag: ['@TC2', '@user-login', '@valid-user'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, accountCreatedDeletedSteps,
-            homePage, signupLoginPage, accountCreatedDeletedPage
+            homePage, signupLoginPage, accountCreatedDeletedPage, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickSignupLogin(logger, homePage);
+            await sharedSteps.clickSignupLogin(logger, homePage.header);
             await signupLoginSteps.validateLoginToAccountText(logger, signupLoginPage);
             await signupLoginSteps.enterLoginData(logger, signupLoginPage, user);
-            await homeSteps.validateUserLoggedText(logger, homePage, user);
-            await homeSteps.clickDeleteAccount(logger, homePage);
-            await accountCreatedDeletedSteps.validateAccountDeletedText(logger, accountCreatedDeletedPage);
+            await sharedSteps.validateUserLoggedText(logger, homePage.header, user);
+            await sharedSteps.clickDeleteAccount(logger, homePage.header);
+            await accountCreatedDeletedSteps.validateAccountActionText(logger, accountCreatedDeletedPage, DELETED);
         });
 
     test('Login with invalid user',
         { tag: ['@TC3', '@TC3.1', '@user-login', '@login-error', '@invalid-user'] },
         async ({
-            logger, page, homeSteps, signupLoginSteps, apiSteps, userApi, homePage, signupLoginPage
+            logger, page, homeSteps, signupLoginSteps, apiSteps, userApi, homePage, signupLoginPage, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickSignupLogin(logger, homePage);
+            await sharedSteps.clickSignupLogin(logger, homePage.header);
             await signupLoginSteps.validateLoginToAccountText(logger, signupLoginPage);
             const email = user.email;
             user.email = `invalid_${user.email}`;
@@ -45,11 +46,11 @@ test.describe('User login', async () => {
     test('Login with invalid password',
         { tag: ['@TC3', '@TC3.2', '@user-login', '@invalid-password'] },
         async ({
-            logger, page, homeSteps, signupLoginSteps, userApi, apiSteps, homePage, signupLoginPage
+            logger, page, homeSteps, signupLoginSteps, userApi, apiSteps, homePage, signupLoginPage, sharedSteps
         }) => {
-            await homeSteps.navigateHome(logger, homePage);
+            await sharedSteps.navigateHome(logger, homePage);
             await homeSteps.validateHomeTitle(logger, page);
-            await homeSteps.clickSignupLogin(logger, homePage);
+            await sharedSteps.clickSignupLogin(logger, homePage.header);
             await signupLoginSteps.validateLoginToAccountText(logger, signupLoginPage);
             const password = user.password;
             user.password = `invalid_${user.password}`;
