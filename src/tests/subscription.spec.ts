@@ -5,7 +5,7 @@ import { StringUtils } from '@utils/string.utils';
 
 test.describe('Subscription validations', async () => {
 
-    test('Validate Subscription in home page',
+    test('Verify Subscription in home page',
         { tag: ['@TC10', '@home', '@subscription'] },
         async ({
             logger, page, homeSteps, homePage, sharedSteps
@@ -18,7 +18,7 @@ test.describe('Subscription validations', async () => {
             await sharedSteps.validateSubscriptionMessage(logger, homePage);
         });
 
-    test('Validate Subscription in cart page',
+    test('Verify Subscription in Cart page',
         { tag: ['@TC11', '@cart', '@subscription'] },
         async ({
             logger, page, homeSteps, homePage, sharedSteps

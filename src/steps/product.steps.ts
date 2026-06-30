@@ -1,6 +1,7 @@
 import { NEWLINE } from '@data/constants/string.constants';
 import { ProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
+import { ProductPage } from '@pages/product.page';
 import { ProductsPage } from '@pages/products.page';
 import { expect, Page } from '@playwright/test';
 import { TestAutomationLogger } from '@utils/logger.utils';
@@ -11,40 +12,57 @@ export class ProductSteps {
     // Actions
     async getProductsCount(logger: TestAutomationLogger, producsPage: ProductsPage): Promise<number> {
         logger.info('Getting the number of Products displayed');
-        let count: number = 0;
+        let count: number;
         await test.step('Getting the number of Products displayed', async () => {
             count = await producsPage.getProductsCount();
         });
-        logger.info(`Found ${count} Products in page`);
-        return count;
+        logger.info(`Found ${count!} Products in page`);
+        return count!;
     }
 
-    async navigateToProductView(logger: TestAutomationLogger, producsPage: ProductsPage, productIndex: number): Promise<void> {
-        logger.info(`Navigating to product #${productIndex}`);
-        await test.step('Navigating to product view', async () => {
-            await producsPage.clickProductView(productIndex);
+    async getProductDetails(logger: TestAutomationLogger, productPage: ProductPage): Promise<ProductType> {
+        logger.info('Retrieving displayed Product details');
+        let product: ProductType;
+        await test.step('Retrieve displayed Product details', async () => {
+            product = await productPage.getProductDetails();
         });
-        logger.info(`Navigated to product #${productIndex}`);
+        logger.info(`Retrieved displayed Product details: ${NEWLINE}${StringUtils.prettyJson(product!)}`);
+        return product!;
     }
+
+    async setProductQuantity(logger: TestAutomationLogger, productPage: ProductPage, quantity: number): Promise<void> {
+        logger.info(`Setting product quantity to ${quantity}`);
+        await test.step('Set product quantity', async () => {
+            await productPage.setQuantity(quantity);
+        });
+        logger.info(`Set product quantity to ${quantity}`);
+    }
+
+    async addToCart(logger: TestAutomationLogger, productPage: ProductPage): Promise<void> {
+        logger.info('Adding product to cart');
+        await test.step('Add product to cart', async () => {
+            await productPage.clickAddToCart();
+        });
+        logger.info('Added product to cart');
+    }
+
+    async viewCart(logger: TestAutomationLogger, productPage: ProductPage): Promise<void> {
+        logger.info('Clicking View Cart');
+        await test.step('Navigating to cart from modal', async () => {
+            await productPage.clickViewCart();
+        });
+        logger.info('Clicked View Cart');
+    }
+
 
     // Validations
-    async validateProductsTitle(logger: TestAutomationLogger, page: Page): Promise<void> {
-        logger.info('Validating Products page title.');
-        await test.step('Validate that Products page have the expected title', async () => {
+    async validateProductDetailsTitle(logger: TestAutomationLogger, page: Page): Promise<void> {
+        logger.info('Validating Product page title.');
+        await test.step('Validate that Product page have the expected title', async () => {
             await expect.soft(
                 page,
                 'Products page should have the expected title'
-            ).toHaveTitle('Automation Exercise - All Products');
-        });
-    }
-
-    async validateProductsCount(logger: TestAutomationLogger, count: number): Promise<void> {
-        logger.info('Validating count of Products in page.');
-        await test.step('Validate that Products page have the expected amout of products', async () => {
-            expect.soft(
-                count,
-                'Products page should have the expected amout of products'
-            ).toBe(34);
+            ).toHaveTitle('Automation Exercise - Product Details');
         });
     }
 

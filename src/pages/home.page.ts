@@ -17,4 +17,8 @@ export class HomePage extends BasePage {
         this.subscription = new SubscriptionActions(page);
     }
 
+    async clickProductView(productIndex: number): Promise<void> {
+        this.click(this.components.productViewLink(productIndex));
+    }
+
 }

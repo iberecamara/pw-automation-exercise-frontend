@@ -31,4 +31,15 @@ export class CartSteps {
         });
     }
 
+    async validateProductQuantity(logger: TestAutomationLogger, cartPage: CartPage, quantity: number): Promise<void> {
+        logger.info(`Validating product quantity in cart to be ${quantity}.`);
+        await test.step('Validate product quantity in cart', async () => {
+            const product = (await cartPage.getCartItems()).at(0);
+            expect.soft(
+                product?.quantity,
+                `Product quantity in cart should be ${quantity}.`
+            ).toBe(quantity);
+        });
+    }
+
 }

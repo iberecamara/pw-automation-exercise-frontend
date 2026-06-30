@@ -10,7 +10,7 @@ test.describe('User login', async () => {
         await apiSteps.createAccount(logger, userApi, user);
     });
 
-    test('Login with valid user',
+    test('Login User with correct email and password',
         { tag: ['@TC2', '@user-login', '@valid-user'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, accountCreatedDeletedSteps,
@@ -26,7 +26,7 @@ test.describe('User login', async () => {
             await accountCreatedDeletedSteps.validateAccountActionText(logger, accountCreatedDeletedPage, DELETED);
         });
 
-    test('Login with invalid user',
+    test('Login User with incorrect email',
         { tag: ['@TC3', '@TC3.1', '@user-login', '@login-error', '@invalid-user'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, apiSteps, userApi, homePage, signupLoginPage, sharedSteps
@@ -43,7 +43,7 @@ test.describe('User login', async () => {
             await apiSteps.deleteAccount(logger, userApi, user);
         });
 
-    test('Login with invalid password',
+    test('Login User with incorrect password',
         { tag: ['@TC3', '@TC3.2', '@user-login', '@invalid-password'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, userApi, apiSteps, homePage, signupLoginPage, sharedSteps

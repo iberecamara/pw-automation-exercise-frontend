@@ -1,9 +1,9 @@
-import { ResumedProductType, ProductType } from '@data/model/product.model';
+import { ProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
 
 test.describe('Products page', async () => {
 
-    test('Validate Products page',
+    test('Verify All Products and product detail page',
         { tag: ['@TC8', '@products'] },
         async ({
             logger, page, homeSteps, homePage, productsSteps, productsPage, productSteps, productPage, sharedSteps
@@ -24,12 +24,12 @@ test.describe('Products page', async () => {
                 condition: 'New',
                 brand: 'Polo'
             };
-            await productsSteps.navigateToProductView(logger, productsPage, firstProduct.index);
+            await productsSteps.navigateToProductView(logger, productsPage, firstProduct.index!);
             const productDetails: ProductType = await productPage.getProductDetails();
             await productSteps.validateProductDetails(logger, firstProduct, productDetails);
         });
 
-    test('Validate Search in Products page',
+    test('Search Product',
         { tag: ['@TC9', '@products', '@search-products'] },
         async ({
             logger, page, homeSteps, homePage, productsSteps, productsPage, sharedSteps
@@ -40,7 +40,7 @@ test.describe('Products page', async () => {
             await productsSteps.validateProductsTitle(logger, page);
             const searchTerm: string = 'blue';
             await productsSteps.searchProducts(logger, productsPage, searchTerm);
-            const products: ResumedProductType[] = await productsSteps.getProducts(logger, productsPage);
+            const products: ProductType[] = await productsSteps.getProducts(logger, productsPage);
             productsSteps.validateDisplayedProductsHaveSearchTerm(logger, products, searchTerm);
         });
 

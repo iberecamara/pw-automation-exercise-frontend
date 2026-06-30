@@ -2,7 +2,7 @@ import { test } from '@fixtures/fixtures';
 
 test.describe('Test Cases page', async () => {
 
-    test('Validate Test Cases page',
+    test('Verify Test Cases Page',
         { tag: ['@TC7', '@test-cases'] },
         async ({
             logger, page, homeSteps, homePage, testCaseSteps, sharedSteps

@@ -2,7 +2,7 @@ import { ProductComponents } from '@components/product.components';
 import { EMPTY } from '@data/constants/string.constants';
 import { ProductType } from '@data/model/product.model';
 import { BasePage } from '@pages/base.page';
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class ProductPage extends BasePage {
 
@@ -30,6 +30,24 @@ export class ProductPage extends BasePage {
             condition: condition.replace('Condition: ', EMPTY),
             brand: brand.replace('Brand: ', EMPTY)
         }
+    }
+
+    async setQuantity(quantity: number): Promise<void> {
+        await this.fill(this.components.productQuantityInput, quantity.toString());
+    }
+
+    async clickAddToCart(): Promise<void> {
+        await this.click(this.components.addToCartButton);
+    }
+
+    async clickContinueShopping(): Promise<void> {
+        await expect(this.components.continueShoppingButton).toBeVisible();
+        await this.click(this.components.continueShoppingButton);
+    }
+
+    async clickViewCart(): Promise<void> {
+        await expect(this.components.viewCartLink).toBeVisible();
+        await this.click(this.components.viewCartLink);
     }
 
 }

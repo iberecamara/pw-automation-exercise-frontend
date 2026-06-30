@@ -9,7 +9,7 @@ test.describe('User logout', async () => {
         await apiSteps.createAccount(logger, userApi, user);
     });
 
-    test('Login with valid user',
+    test('Logout User',
         { tag: ['@TC4', '@user-logout'] },
         async ({
             logger, page, homeSteps, signupLoginSteps, apiSteps, userApi,

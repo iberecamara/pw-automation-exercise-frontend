@@ -1,9 +1,10 @@
 import { ProductType } from '@data/model/product.model';
 import { test } from '@fixtures/fixtures';
+import { NumberUtils } from '@utils/number.utils';
 
 test.describe('Cart validations', async () => {
 
-    test('Validate adding Products to Cart',
+    test('Add Products in Cart',
         { tag: ['@TC12', '@products', '@cart'] },
         async ({
             logger, page, homeSteps, homePage, productsSteps, productsPage, sharedSteps, cartPage, cartSteps
@@ -31,13 +32,30 @@ test.describe('Cart validations', async () => {
 
             await productsSteps.hoverProduct(logger, productsPage, firstProductName);
             await productsSteps.addProductToCartFromHover(logger, productsPage, firstProductName);
-            await productsSteps.continueShopping(logger, productsPage);
+            await sharedSteps.continueShopping(logger, productsPage);
             await productsSteps.hoverProduct(logger, productsPage, secondProductName);
             await productsSteps.addProductToCartFromHover(logger, productsPage, secondProductName);
-            await productsSteps.continueShopping(logger, productsPage);
+            await sharedSteps.continueShopping(logger, productsPage);
             await sharedSteps.clickCart(logger, productsPage.header);
             const items = await cartSteps.getCartProducts(logger, cartPage);
             await cartSteps.validateCartItems(logger, items, [firstProductData, secondProductData]);
+        });
+
+    test('Verify Product quantity in Cart',
+        { tag: ['@TC13', '@products', '@cart'] },
+        async ({
+            logger, page, homeSteps, homePage, productSteps, productPage, sharedSteps, cartPage, cartSteps
+        }) => {
+            await sharedSteps.navigateHome(logger, homePage);
+            await homeSteps.validateHomeTitle(logger, page);
+            const randomIndex = NumberUtils.getRandomNumber({ min: 1, max: 34 });
+            await homeSteps.viewProduct(logger, homePage, randomIndex);
+            await productSteps.validateProductDetailsTitle(logger, page);
+            const quantity = 4;
+            await productSteps.setProductQuantity(logger, productPage, quantity);
+            await productSteps.addToCart(logger, productPage);
+            await productSteps.viewCart(logger, productPage);
+            await cartSteps.validateProductQuantity(logger, cartPage, quantity);
         });
 
 });

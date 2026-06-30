@@ -70,14 +70,6 @@ export class ProductsSteps {
         logger.info(`Added product '${productName}' to cart from hover overlay.`);
     }
 
-    async continueShopping(logger: TestAutomationLogger, productsPage: ProductsPage): Promise<void> {
-        logger.info('Clicking Continue Shopping.');
-        await test.step('Click Continue Shopping', async () => {
-            await productsPage.clickContinueShopping();
-        });
-        logger.info('Clicked Continue Shopping.');
-    }
-
     // Validations
     async validateProductsTitle(logger: TestAutomationLogger, page: Page): Promise<void> {
         logger.info('Validating Products page title.');

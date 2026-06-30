@@ -6,6 +6,8 @@ import { test } from '@fixtures/fixtures';
 import { BasePage } from '@pages/base.page';
 import { CartPage } from '@pages/cart.page';
 import { HomePage } from '@pages/home.page';
+import { ProductPage } from '@pages/product.page';
+import { ProductsPage } from '@pages/products.page';
 import { expect } from '@playwright/test';
 import { TestAutomationLogger } from '@utils/logger.utils';
 
@@ -100,6 +102,14 @@ export class SharedSteps {
             await pageObject.subscription.clickSubscribe();
         });
         logger.info('Subscribed email in page');
+    }
+
+    async continueShopping(logger: TestAutomationLogger, pageObject: ProductsPage | ProductPage): Promise<void> {
+        logger.info('Clicking Continue Shopping.');
+        await test.step('Click Continue Shopping', async () => {
+            await pageObject.clickContinueShopping();
+        });
+        logger.info('Clicked Continue Shopping.');
     }
 
     // Validations

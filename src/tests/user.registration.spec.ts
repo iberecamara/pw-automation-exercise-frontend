@@ -31,7 +31,7 @@ test.describe('User registration', async () => {
 
         });
 
-    test('Error for existing email in Register user',
+    test('Register User with existing email',
         { tag: ['@TC5', '@user-register', '@user-register-error'] },
         async ({
             page, logger, homeSteps, signupLoginSteps, apiSteps, userApi, homePage, signupLoginPage, sharedSteps
